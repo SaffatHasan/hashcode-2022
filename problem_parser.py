@@ -3,22 +3,26 @@ from model import Contributor, Project, RequiredSkill
 def parse(path_name):
     with open(path_name) as file:
         nr_contributor, nr_projects = [int(col) for col in file.readline().strip().split(" ")]
-        return parse_contributors(file, nr_contributor), parse_projects(file, nr_projects)
+        contributors = parse_contributors(file, nr_contributor)
+        projects = parse_projects(file, nr_projects)
+        return projects, contributors
 
 
 def parse_contributors(file, n):
     contributors = []
     for _ in range(n):
         name, num_skills = file.readline().split()
-        num_skills = int(num_skills)
-        skills = parse_skills()
+        skills = parse_skills(file, int(num_skills))
         contributors.append(Contributor(name, skills))
     return contributors
 
 
 def parse_skills(file, n):
-    return {skill: int(skill_level) for skill, skill_level in file.readline.split() for _ in range(n)}
-
+    skills = {}
+    for _ in range(n):
+        skill, level = file.readline().split()
+        skills[skill] = int(level)
+    return skills
 
 def parse_projects(file, n):
     projects = []

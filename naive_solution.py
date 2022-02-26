@@ -2,7 +2,7 @@ from typing import List
 from model import Project, Contributor
 from util import get_role_availability, sort_projects_by_manhours
 
-def naive(projects, contributors):
+def solve(projects, contributors):
     """ Try to fill each project with the first available contributor.
 
     Only assign 1 project per contributor (to avoid running overtime / penalty).

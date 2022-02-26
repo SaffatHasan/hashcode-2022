@@ -2,7 +2,7 @@ from model import Contributor, Project
 from typing import List
 
 
-def linear_scheduling(projects: List[Project], contributors: List[Contributor]):
+def solve(projects: List[Project], contributors: List[Contributor]):
     planned_projects: List[Project] = []
     planned_contributors: List[List[Contributor]] = []
 

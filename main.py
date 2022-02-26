@@ -1,8 +1,7 @@
-from parser import parse
+from problem_parser import parse
 import naive_solution
 import linear_solution
 from output import score
-
 
 if __name__ == '__main__':
     files = [
@@ -13,12 +12,14 @@ if __name__ == '__main__':
         "input/e_exceptional_skills.in.txt",
         "input/f_find_great_mentors.in.txt"
     ]
-    for f in files:
-        contributors, projects = parse(f)
-        naive = naive_solution.solve(projects, contributors)
-        linear = linear_solution.solve(projects, contributors)
-        print(f"{f} {score(naive)=} {score(linear)=}")
 
+    algorithms = {
+        "naive": naive_solution, 
+        "linear": linear_solution,
+    }
 
-
-
+    for name, algo in algorithms.items():
+        total_score = sum(
+            score(*algo.solve(*parse(f))) for f in files
+        )
+        print(f"{name:10} {total_score:10,}")

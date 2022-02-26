@@ -1,3 +1,5 @@
+from typing import List
+
 class RequiredSkill:
     def __init__(self, name, level):
         self.name = name
